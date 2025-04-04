@@ -1,1 +1,425 @@
+/* --- CSS Variables (Strict B&W Dark Theme) & Base Styles --- */
+:root {
+    /* Timing & Easing */
+    --ease-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-duration-normal: 0.6s; /* Animações um pouco mais lentas para B&W */
+    --transition-duration-fast: 0.4s;
+    --transition-duration-faster: 0.2s;
+
+    /* Strict B&W Dark Theme Colors */
+    --bg-color: #0a0a0a;            /* Quase preto */
+    --surface-color: #1a1a1a;       /* Cinza escuro para superfícies */
+    --primary-text-color: #f0f0f0;  /* Branco suave */
+    --secondary-text-color: #a0a0a0;/* Cinza médio-claro */
+    --border-color-light: #444444;  /* Cinza para bordas sutis */
+    --border-color-medium: #666666; /* Cinza para bordas mais visíveis */
+    --button-bg: #ffffff;           /* Botão branco */
+    --button-text-color: #0a0a0a;   /* Texto preto no botão */
+    --button-border-color: #ffffff; /* Borda branca */
+    --button-hover-bg: #e0e0e0;      /* Cinza claro no hover */
+    --button-hover-border-color: #e0e0e0;
+    --faq-border-color: #2a2a2a;    /* Borda escura para itens FAQ */
+    --divider-color: var(--primary-text-color); /* Divisor branco para contraste */
+    --faq-icon-color: var(--secondary-text-color); /* Ícone cinza no FAQ */
+
+    /* Font Families */
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- Reset & Global Styles --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--primary-text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color var(--transition-duration-normal) var(--ease-out-smooth),
+                color var(--transition-duration-normal) var(--ease-out-smooth);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Container --- */
+.container {
+    max-width: 800px;
+    width: 90%;
+    padding: 8vh 15px 5vh 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* --- Header & Title --- */
+.main-header {
+    margin-bottom: 1.5rem;
+}
+
+.main-title {
+    font-family: var(--font-body);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--primary-text-color);
+}
+
+/* --- General Content Section Styling --- */
+.content-section {
+    width: 100%;
+    padding: 4rem 0; /* Espaçamento vertical entre seções */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content-section.hero-content {
+    padding-top: 0; /* Sem padding extra no topo da seção hero */
+    margin-bottom: 0; /* Reset margin bottom */
+}
+.faq-section {
+     border-top: 1px solid var(--border-color-light);
+}
+
+.section-title {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 600;
+    color: var(--primary-text-color);
+    margin-bottom: 1rem; /* Menos espaço antes do subtítulo */
+}
+
+.section-subtitle,
+.subtitle { /* Aplicando estilo comum */
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem); /* Levemente menor */
+    font-weight: 300; /* Mais leve */
+    color: var(--secondary-text-color);
+    margin-bottom: 2.5rem;
+    max-width: 650px; /* Largura máxima do texto */
+    line-height: 1.7; /* Bom espaçamento entre linhas */
+}
+.subtitle { /* Estilo específico para o subtítulo principal */
+     margin-bottom: 2rem;
+     max-width: 600px;
+}
+
+/* --- Divider --- */
+.divider {
+    width: 60px;
+    height: 2px; /* Mais fino */
+    background-color: var(--divider-color);
+    border: none;
+    border-radius: 1px;
+    margin-bottom: 2.5rem;
+    max-width: 0;
+    opacity: 0;
+}
+
+.divider.animated-element {
+    animation: growDivider 1s var(--ease-out-smooth) 1.0s forwards;
+}
+
+/* --- CTA Button (B&W Style) --- */
+.cta-button {
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+    border: 2px solid var(--button-border-color);
+    padding: 14px 35px; /* Leve ajuste */
+    font-size: 0.95rem; /* Leve ajuste */
+    font-weight: 600;
+    font-family: var(--font-body);
+    text-decoration: none;
+    letter-spacing: 0.8px; /* Um pouco mais de espaçamento */
+    border-radius: 8px; /* Leve ajuste */
+    cursor: pointer;
+    transition: background-color var(--transition-duration-fast) ease,
+                border-color var(--transition-duration-fast) ease,
+                color var(--transition-duration-fast) ease, /* Transição de cor do texto */
+                transform var(--transition-duration-faster) ease,
+                box-shadow var(--transition-duration-fast) ease;
+    display: inline-block;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1); /* Sombra branca sutil */
+}
+
+.cta-button:hover {
+    background-color: var(--button-hover-bg);
+    border-color: var(--button-hover-border-color);
+    color: #000; /* Manter texto preto no hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.15);
+}
+
+.cta-button:active {
+    transform: translateY(0px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* --- FAQ Section --- */
+.faq-container {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem; /* Espaço menor entre itens */
+}
+
+.faq-item {
+    background-color: var(--surface-color);
+    border-radius: 10px;
+    border: 1px solid var(--faq-border-color);
+    overflow: hidden;
+}
+
+.faq-question { margin: 0; }
+
+.faq-question button {
+    background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; outline: none;
+    display: flex; justify-content: space-between; align-items: center; width: 100%;
+    padding: 1.1rem 1.4rem; font-size: 1.05rem; font-weight: 500; text-align: left; color: var(--primary-text-color);
+    transition: background-color var(--transition-duration-faster) ease;
+}
+.faq-question button:hover { background-color: rgba(255, 255, 255, 0.03); }
+
+.faq-question button::after { /* Indicador Icon */
+    content: '+'; font-size: 1.5rem; font-weight: 300; color: var(--faq-icon-color); margin-left: 1rem;
+    transition: transform var(--transition-duration-fast) var(--ease-out-smooth); flex-shrink: 0;
+}
+.faq-item.active .faq-question button::after { transform: rotate(45deg); }
+
+.faq-answer {
+    max-height: 0; opacity: 0; overflow: hidden; padding: 0 1.4rem; color: var(--secondary-text-color);
+    font-size: 0.95rem; line-height: 1.6;
+    transition: max-height 0.4s var(--ease-out-smooth), opacity 0.4s var(--ease-out-smooth), padding 0.4s var(--ease-out-smooth);
+}
+.faq-item.active .faq-answer {
+    max-height: 500px; opacity: 1; padding: 0.4rem 1.4rem 1.4rem 1.4rem;
+}
+
+/* --- Exclusive Content Price Styling --- */
+.price-container {
+    margin-bottom: 2rem;
+}
+.price {
+    font-size: 2.8rem; /* Tamanho grande para o preço */
+    font-weight: 700;
+    color: var(--primary-text-color);
+    line-height: 1;
+}
+.price-period {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--secondary-text-color);
+    margin-left: 0.5rem;
+}
+
+/* --- Footer --- */
+.main-footer {
+    margin-top: 4rem; /* Menos margem no final */
+    padding: 2rem 0;
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+    border-top: 1px solid var(--border-color-light);
+    width: 100%; /* Faz o footer ocupar a largura toda */
+    text-align: center;
+}
+
+/* --- Initial Entrance Animations --- */
+.animated-element {
+    opacity: 0;
+    transform: translateY(25px);
+}
+.main-title.animated-element { animation: fadeInUp 1.0s var(--ease-out-smooth) 0.2s forwards; }
+.subtitle.animated-element { animation: fadeInUp 1.0s var(--ease-out-smooth) 0.4s forwards; }
+.divider.animated-element { animation: growDivider 1s var(--ease-out-smooth) 0.8s forwards; } /* Delay ajustado */
+.cta-button.animated-element { animation: fadeInUp 1.0s var(--ease-out-smooth) 1.0s forwards; transform: scale(0.95) translateY(25px); } /* Delay ajustado */
+.faq-section.animated-element { animation: fadeInUp 1.0s var(--ease-out-smooth) 1.2s forwards; }
+/* Footer não precisa de animação de entrada se estiver sempre visível no final */
+/* .main-footer.animated-element { animation: fadeInUp 1.0s var(--ease-out-smooth) 1.8s forwards; } */
+
+
+/* --- Scroll Fade-In Animation --- */
+.scroll-fade-in {
+    opacity: 0;
+    transform: translateY(40px); /* Começa um pouco mais abaixo */
+    transition: opacity 0.8s var(--ease-out-smooth), transform 0.8s var(--ease-out-smooth);
+}
+
+.scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Keyframe Animations (Reutilizadas) --- */
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes growDivider {
+    to { max-width: 60px; opacity: 1; }
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 768px) {
+    html { font-size: 15px; }
+    .container { padding-top: 10vh; }
+    .content-section { padding: 3rem 0; }
+    .faq-container { max-width: 100%; }
+    .faq-question button { padding: 1rem 1.2rem; font-size: 1rem; }
+    .faq-answer { padding: 0 1.2rem; font-size: 0.9rem; }
+    .faq-item.active .faq-answer { padding: 0.5rem 1.2rem 1.2rem 1.2rem; }
+    .price { font-size: 2.5rem; }
+}
+
+@media (max-width: 480px) {
+    html { font-size: 14px; }
+    .main-title { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+    .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
+    .section-subtitle, .subtitle { font-size: clamp(1rem, 3.5vw, 1.1rem); }
+    .cta-button { width: 85%; padding: 15px 20px; font-size: 0.9rem; }
+    .price { font-size: 2.2rem; }
+    .price-period { font-size: 0.9rem; }
+}
+
+/* --- Novas Seções --- */
+
+/* --- Seção Redes Sociais --- */
+.social-links {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os links quebrem linha em telas menores */
+    justify-content: center;
+    gap: 1.5rem; /* Espaço entre os links */
+    margin-top: 1rem; /* Espaço após o subtítulo */
+}
+
+.social-link {
+    color: var(--primary-text-color);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 15px;
+    border: 1px solid var(--border-color-medium);
+    border-radius: 6px;
+    transition: background-color var(--transition-duration-fast) ease,
+                border-color var(--transition-duration-fast) ease,
+                color var(--transition-duration-fast) ease;
+}
+
+.social-link:hover {
+    background-color: var(--surface-color);
+    border-color: var(--primary-text-color);
+    color: var(--primary-text-color);
+}
+
+/* --- Seção Moderadores --- */
+.moderator-list {
+    margin-top: 1rem;
+}
+
+.moderator-name {
+    font-size: 1.1rem;
+    color: var(--primary-text-color);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+.moderator-name:last-child {
+    margin-bottom: 0;
+}
+
+/* --- Seção Produtos (Esgotados) --- */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Layout responsivo em grid */
+    gap: 2rem; /* Espaço entre os produtos */
+    width: 100%;
+    max-width: 750px; /* Limita a largura máxima do grid */
+    margin-top: 1rem;
+}
+
+.product-item {
+    border: 1px solid var(--border-color-light);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform var(--transition-duration-fast) ease, box-shadow var(--transition-duration-fast) ease;
+}
+
+/* Opcional: Adiciona um leve efeito de elevação no hover */
+.product-item:hover {
+   transform: translateY(-4px);
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais escura para o tema */
+}
+
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 1.2rem;
+    border-radius: 4px;
+    background-color: var(--bg-color); /* Fundo caso a imagem demore a carregar */
+}
+
+.product-info {
+    margin-top: auto; /* Empurra as informações para baixo se a altura dos itens variar */
+}
+
+.product-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary-text-color); /* Cor mais suave para item esgotado */
+    margin-bottom: 0.5rem;
+}
+
+/* Aplica o risco sobre o texto do nome */
+.product-name .strikethrough {
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px; /* Espessura do risco */
+    text-decoration-color: var(--secondary-text-color); /* Cor do risco */
+}
+
+
+.sold-out-label {
+    display: inline-block; /* Para aplicar padding e margem corretamente */
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700; /* Destaca a informação */
+    color: var(--primary-text-color); /* Cor de destaque */
+    /* Opcional: adicionar um fundo ou borda sutil */
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    /* padding: 3px 8px; */
+    /* border-radius: 4px; */
+    letter-spacing: 0.5px;
+}
+
+/* --- Ajustes Responsivos para Novas Seções (Opcional) --- */
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+        gap: 1.5rem;
+    }
+    .product-item {
+        padding: 1rem;
+    }
+    .social-links {
+        gap: 1rem;
+    }
+    .social-link {
+        padding: 7px 12px;
+        font-size: 0.9rem;
+    }
+}
 
